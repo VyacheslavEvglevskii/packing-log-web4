@@ -4,12 +4,19 @@ export default async function handler(req, res) {
       const googleScriptUrl =
         "https://script.google.com/macros/s/AKfycbxjw4Ty-2uHmmW_dvxFbxBhEyWyT5TknHi8-qk9l66e2gOmvgzaNyqGJ5eBvk4xW7Q/exec";
 
+      const params = new URLSearchParams();
+      params.append("employeeName", req.body.employeeName || "");
+      params.append("quantity", req.body.quantity || "");
+      params.append("startTime", req.body.startTime || "");
+      params.append("endTime", req.body.endTime || "");
+      params.append("duration", req.body.duration || "");
+
       const result = await fetch(googleScriptUrl, {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": "application/x-www-form-urlencoded",
         },
-        body: JSON.stringify(req.body),
+        body: params.toString(),
       });
 
       const text = await result.text();
