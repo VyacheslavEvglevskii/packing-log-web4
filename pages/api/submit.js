@@ -2,7 +2,7 @@ export default async function handler(req, res) {
   if (req.method === "POST") {
     try {
       const googleScriptUrl =
-        "https://script.google.com/macros/s/AKfycbxjw4Ty-2uHmmW_dvxFbxBhEyWyT5TknHi8-qk9l66e2gOmvgzaNyqGJ5eBvk4xW7Q/exec";
+        "https://script.google.com/macros/s/AKfycbwmudQ2mYROwNMP6anH18K2gOtWcrYxWhvQGLOsR3x3evru8CeH_qiHGVvxLIe8O8Nh/exec";
 
       const result = await fetch(googleScriptUrl, {
         method: "POST",
@@ -13,10 +13,8 @@ export default async function handler(req, res) {
       });
 
       const text = await result.text();
-
       return res.status(200).json({ success: true, response: text });
     } catch (error) {
-      console.error("Ошибка прокси:", error);
       return res.status(500).json({ success: false, error: "Ошибка сервера" });
     }
   }
